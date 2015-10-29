@@ -1,0 +1,358 @@
+	<!DOCTYPE html>
+<html>
+<head>
+	<title>Trying it Again</title>
+	<link rel="stylesheet" type="text/css" href="player.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>	
+</head>
+<body>
+	<div align="center">
+		<button id="playall">Play</button>
+	</div>
+	
+	<br>
+	<div id="songseek" align="center">
+		<p id="currtime">00:00</p>
+		<input type="range" id="timeelapsed" min="0" step="1" max="3" value="0">
+		<p id="endtime">00:00</p>
+	</div>
+
+
+
+	<div id="alltracks">
+
+		<div class="trackclass" id="track1">
+			<audio id="primarytrack" preload="auto"><source src="songs/mix/01_Kick.mp3" type="audio/mpeg">Not Supported</audio>
+
+			<h2>Kick</h2>
+			<h3>Volume</h3>
+			<input type="range" class="volumeclass" min="0" max="1" step="0.1" value="1" orient="vertical"/>
+			<br>
+			<h3>Pan</h3>
+			<input type="range" class="pannerclass" min="-1" max="1" step="0.1" value="0" />
+			<br>
+			<button class="muteclass">Mute</button>
+		</div>
+
+		<div class="trackclass" id="track2">
+			<audio preload="auto"><source src="songs/mix/02_Snare.mp3" type="audio/mpeg">Not Supported</audio>
+
+			<h2>Snare</h2>
+			<h3>Volume</h3>
+			<input type="range" class="volumeclass" min="0" max="1" step="0.1" value="1" orient="vertical"/>
+			<br>
+			<h3>Pan</h3>
+			<input type="range" class="pannerclass" min="-1" max="1" step="0.1" value="0" />
+			<br>
+			<button class="muteclass">Mute</button>
+		</div>
+
+		<div class="trackclass" id="track3">
+			<audio preload="auto"><source src="songs/mix/03_Overheads.mp3" type="audio/mpeg">Not Supported</audio>
+
+			<h2>Overheads</h2>
+			<h3>Volume</h3>
+			<input type="range" class="volumeclass" min="0" max="1" step="0.1" value="1" orient="vertical"/>
+			<br>
+			<h3>Pan</h3>
+			<input type="range" class="pannerclass" min="-1" max="1" step="0.1" value="0" />
+			<br>
+			<button class="muteclass">Mute</button>
+		</div>
+
+		<div class="trackclass" id="track4">
+			<audio preload="auto"><source src="songs/mix/04_Cymbals.mp3" type="audio/mpeg">Not Supported</audio>
+
+			<h2>Cymbals</h2>
+			<h3>Volume</h3>
+			<input type="range" class="volumeclass" min="0" max="1" step="0.1" value="1" orient="vertical"/>
+			<br>
+			<h3>Pan</h3>
+			<input type="range" class="pannerclass" min="-1" max="1" step="0.1" value="0" />
+			<br>
+			<button class="muteclass">Mute</button>
+		</div>
+
+		<div class="trackclass" id="track5">
+			<audio preload="auto"><source src="songs/mix/05_Bass.mp3" type="audio/mpeg">Not Supported</audio>
+
+			<h2>Bass</h2>
+			<h3>Volume</h3>
+			<input type="range" class="volumeclass" min="0" max="1" step="0.1" value="1" orient="vertical"/>
+			<br>
+			<h3>Pan</h3>
+			<input type="range" class="pannerclass" min="-1" max="1" step="0.1" value="0" />
+			<br>
+			<button class="muteclass">Mute</button>
+		</div>
+
+		<div class="trackclass" id="track6">
+			<audio preload="auto"><source src="songs/mix/07_ElecGtr1.mp3" type="audio/mpeg">Not Supported</audio>
+
+			<h2>Guitar 1</h2>
+			<h3>Volume</h3>
+			<input type="range" class="volumeclass" min="0" max="1" step="0.1" value="1" orient="vertical"/>
+			<br>
+			<h3>Pan</h3>
+			<input type="range" class="pannerclass" min="-1" max="1" step="0.1" value="0" />
+			<br>
+			<button class="muteclass">Mute</button>
+		</div>
+
+		<div class="trackclass" id="track7">
+			<audio preload="auto"><source src="songs/mix/08_ElecGtr2.mp3" type="audio/mpeg">Not Supported</audio>
+
+			<h2>Guitar 2</h2>
+			<h3>Volume</h3>
+			<input type="range" class="volumeclass" min="0" max="1" step="0.1" value="1" orient="vertical"/>
+			<br>
+			<h3>Pan</h3>
+			<input type="range" class="pannerclass" min="-1" max="1" step="0.1" value="0" />
+			<br>
+			<button class="muteclass">Mute</button>
+		</div>
+
+		<div class="trackclass" id="track8">
+			<audio preload="auto"><source src="songs/mix/09_LeadVox.mp3" type="audio/mpeg">Not Supported</audio>
+
+			<h2>Vocals</h2>
+			<h3>Volume</h3>
+			<input type="range" class="volumeclass" min="0" max="1" step="0.1" value="1" orient="vertical"/>
+			<br>
+			<h3>Pan</h3>
+			<input type="range" class="pannerclass" min="-1" max="1" step="0.1" value="0" />
+			<br>
+			<button class="muteclass">Mute</button>
+		</div>
+
+		<div class="trackclass" id="track9">
+			<audio preload="auto"><source src="songs/mix/10_HammondLeslieHi.mp3" type="audio/mpeg">Not Supported</audio>
+
+			<h2>Keys High</h2>
+			<h3>Volume</h3>
+			<input type="range" class="volumeclass" min="0" max="1" step="0.1" value="1" orient="vertical"/>
+			<br>
+			<h3>Pan</h3>
+			<input type="range" class="pannerclass" min="-1" max="1" step="0.1" value="0" />
+			<br>
+			<button class="muteclass">Mute</button>
+		</div>
+
+		<div class="trackclass" id="track10">
+			<audio preload="auto"><source src="songs/mix/11_HammondLeslieLo.mp3" type="audio/mpeg">Not Supported</audio>
+
+			<h2>Keys Low</h2>
+			<h3>Volume</h3>
+			<input type="range" class="volumeclass" min="0" max="1" step="0.1" value="1" orient="vertical"/>
+			<br>
+			<h3>Pan</h3>
+			<input type="range" class="pannerclass" min="-1" max="1" step="0.1" value="0" />
+			<br>
+			<button class="muteclass">Mute</button>
+		</div>
+	</div>
+
+	<br>
+
+	<div class="masterbuttons">
+		<div align="center">
+			<button id="centerpan">Center Panning</button>
+		</div>
+
+		<div align="center">
+			<button id="muteall" value="muteall">Mute All</button>
+		</div>
+	</div>
+	
+
+
+	<script>
+		var audioCtx      = new (window.AudioContext || window.webkitAudioContext)();
+		var playAllButton = document.getElementById('playall');
+		var muteAllButton = document.getElementById('muteall');
+		
+		//////////////////////////////Time display slider//////////////////////////////
+
+		var timeElapsed  = document.getElementById('timeelapsed');
+		var primaryTrack = document.getElementById('primarytrack');
+		var currentTime  = document.getElementById('currtime');
+		var endTime      = document.getElementById('endtime');
+		var centerPanButton = document.getElementById('centerpan');
+
+		primaryTrack.addEventListener("timeupdate", function(){
+			timeElapsed.value = Math.floor(primaryTrack.currentTime);
+			currentTime.innerHTML = formatTime(primaryTrack.currentTime);
+			if (primaryTrack.ended) {
+				timeElapsed.value = 0;
+				currentTime.innerHTML = "00:00";
+				updateTrackPositions();
+				updatePlays();
+			}
+		});
+
+		///////////////////////////////////////////////////////////////////////////////
+
+
+
+	
+	
+		makeNewTrack("track1", audioCtx);
+		makeNewTrack("track2", audioCtx);
+		makeNewTrack("track3", audioCtx);
+		makeNewTrack("track4", audioCtx);
+		makeNewTrack("track5", audioCtx);
+		makeNewTrack("track6", audioCtx);
+		makeNewTrack("track7", audioCtx);
+		makeNewTrack("track8", audioCtx);
+		makeNewTrack("track9", audioCtx);
+		makeNewTrack("track10", audioCtx);
+
+
+		playAllButton.onclick = updatePlays;
+		muteAllButton.onclick = updateMutes;
+		centerPanButton.onclick = updatePans;
+		timeElapsed.oninput   = updateTrackPositions; 
+
+		////////////////////////////////////FUNCTIONS//////////////////////////////////	
+
+		function makeNewTrack(id, audiocontext){
+			var div        = document.getElementById(id);
+			var divchild   = div.children;
+			var audio      = divchild[0];
+			var volSlider  = divchild[3];
+			var panSlider  = divchild[6];
+			var muteButton = divchild[8];
+
+			var panNode = audiocontext.createStereoPanner();
+			var source = audiocontext.createMediaElementSource(audio);
+
+			source.connect(panNode);
+			panNode.connect(audiocontext.destination);
+
+			function updatePan(){
+				panNode.pan.value = panSlider.value;
+
+			}
+
+			function updateVol(){
+				audio.volume = volSlider.value;
+			}
+
+			function updateMute(){
+				if (audio.muted){
+					audio.muted = false;
+					muteButton.innerHTML = "Mute";
+					muteButton.style.backgroundColor = "white";
+				}
+				else {
+					audio.muted = true;
+					muteButton.innerHTML = "Unmute";
+					muteButton.style.backgroundColor = "#C6BEB5";
+				}
+			}
+
+			panSlider.oninput = updatePan;
+			volSlider.oninput = updateVol;
+			muteButton.onclick = updateMute;
+
+		}
+
+		function updatePlays(){
+			endTime.innerHTML = formatTime(primaryTrack.duration);
+			timeElapsed.max = primaryTrack.duration;
+			var div  = document.getElementById("alltracks");
+			tracks = div.children;
+			for (i = 0; i < tracks.length; i++){
+				trackchilds = tracks[i].children;
+				audioelement = trackchilds[0];
+				if (audioelement.paused){
+					audioelement.play();
+					playAllButton.innerHTML = "Pause";
+				}
+				else {
+					audioelement.pause();
+					playAllButton.innerHTML = "Play";
+				}
+			} 
+		}
+
+		function updateMutes(){
+			var div  = document.getElementById("alltracks");
+			tracks = div.children;
+			for (i = 0; i < tracks.length; i++){
+				trackchilds  = tracks[i].children;
+				audioelement = trackchilds[0];
+				muteelement = trackchilds[8];
+				if (muteAllButton.value == "muteall"){
+					audioelement.muted = true;
+					muteelement.innerHTML = "Unmute";
+					muteelement.style.backgroundColor = "#C6BEB5";
+				}
+				else if (muteAllButton.value == "unmute"){
+					audioelement.muted = false;
+					muteelement.innerHTML = "Mute";
+					muteelement.style.backgroundColor = "white";
+				}
+			} 
+
+			if (muteAllButton.value == "muteall"){
+				muteAllButton.value = "unmute";
+				muteAllButton.innerHTML = "Unmute All";
+				muteAllButton.style.backgroundColor = "#C6BEB5";
+				muteAllButton.style.color = "#3172AE";
+			}
+			else if (muteAllButton.value == "unmute"){
+				muteAllButton.value = "muteall";
+				muteAllButton.innerHTML = "Mute All";
+				muteAllButton.style.backgroundColor = "#3172AE";
+				muteAllButton.style.color = "white";
+			}
+		}
+
+		function updatePans(){
+			var div  = document.getElementById("alltracks");
+			tracks = div.children;
+			for (i = 0; i < tracks.length; i++){
+				trackchilds  = tracks[i].children;
+				panelement = trackchilds[6];
+				panelement.value = "0";
+			}
+		}
+
+		function updateTrackPositions(){
+			var Elapsed = timeElapsed.value;
+			var div  = document.getElementById("alltracks");
+			tracks = div.children;
+			var trackchilds;
+			var audioelement;
+			for (i = 0; i < tracks.length; i++){
+				trackchilds = tracks[i].children;
+				audioelement = trackchilds[0];
+				audioelement.pause();
+			}
+			for (i = 0; i < tracks.length; i++){
+				trackchilds = tracks[i].children;
+				audioelement = trackchilds[0];
+				audioelement.currentTime = Elapsed;
+			}
+			for (i = 0; i < tracks.length; i++){
+				trackchilds = tracks[i].children;
+				audioelement = trackchilds[0];
+				audioelement.play();
+			}
+		}
+
+
+		function formatTime(value) { 
+			var tick = value;
+			var mins = Math.floor(tick/60);
+			var secs = Math.floor(tick % 60);
+			var tock = (mins < 10 ? "0" : "" ) + mins + ":" + (secs < 10 ? "0" : "" ) + secs;
+			return tock;
+		}
+
+
+	</script>
+</body>
+</html>
