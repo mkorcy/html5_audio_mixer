@@ -4,13 +4,13 @@
 	<title>Trying it Again</title>
 	<link rel="stylesheet" type="text/css" href="player.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>	
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
 </head>
 <body>
 	<div align="center">
-		<button id="playall">Play</button>
+		<button id="playall" disabled="true">Play</button>
 	</div>
-	
+
 	<br>
 	<div id="songseek" align="center">
 		<p id="currtime">00:00</p>
@@ -164,39 +164,32 @@
 			<button id="muteall" value="muteall">Mute All</button>
 		</div>
 	</div>
-	
+
 
 
 	<script>
 		var audioCtx      = new (window.AudioContext || window.webkitAudioContext)();
 		var playAllButton = document.getElementById('playall');
 		var muteAllButton = document.getElementById('muteall');
-		
+
 		//////////////////////////////Time display slider//////////////////////////////
 
-		var timeElapsed  = document.getElementById('timeelapsed');
+		var playHead  = document.getElementById('timeelapsed');
 		var primaryTrack = document.getElementById('primarytrack');
 		var currentTime  = document.getElementById('currtime');
 		var endTime      = document.getElementById('endtime');
 		var centerPanButton = document.getElementById('centerpan');
 
-		primaryTrack.addEventListener("timeupdate", function(){
-			timeElapsed.value = Math.floor(primaryTrack.currentTime);
-			currentTime.innerHTML = formatTime(primaryTrack.currentTime);
-			if (primaryTrack.ended) {
-				timeElapsed.value = 0;
-				currentTime.innerHTML = "00:00";
-				updateTrackPositions();
-				updatePlays();
-			}
+		audioReady().then(function(){
+			playAllButton.disabled=false
 		});
 
 		///////////////////////////////////////////////////////////////////////////////
 
 
 
-	
-	
+
+
 		makeNewTrack("track1", audioCtx);
 		makeNewTrack("track2", audioCtx);
 		makeNewTrack("track3", audioCtx);
@@ -212,11 +205,39 @@
 		playAllButton.onclick = updatePlays;
 		muteAllButton.onclick = updateMutes;
 		centerPanButton.onclick = updatePans;
-		timeElapsed.oninput   = updateTrackPositions; 
+		$(primaryTrack).on('timeupdate', timeUpdateListener);
+		playHead.addEventListener('mousedown', playHeadMouseDown, false);
+		playHead.addEventListener('mouseup', playHeadMouseUp, false);
 
 
 
-		////////////////////////////////////FUNCTIONS//////////////////////////////////	
+
+		////////////////////////////////////FUNCTIONS//////////////////////////////////
+
+		// mouseDown EventListener
+
+		function playHeadMouseUp() {
+			updateTrackPositions();
+			$(primaryTrack).on('timeupdate', timeUpdateListener);
+		}
+		function playHeadMouseDown() {
+
+
+      $(primaryTrack).off('timeupdate');
+		}
+
+		function timeUpdateListener(){
+
+			playHead.value = Math.floor(primaryTrack.currentTime);
+			currentTime.innerHTML = formatTime(primaryTrack.currentTime);
+
+			if (primaryTrack.ended) {
+				playHead.value = 0;
+				currentTime.innerHTML = "00:00";
+				updateTrackPositions();
+				updatePlays();
+			}
+		}
 
 		function makeNewTrack(id, audiocontext){
 			var div        = document.getElementById(id);
@@ -261,11 +282,21 @@
 			muteButton.onclick = updateMute;
 
 		}
+    function audioReady(){
+      return $.when.apply($, $('audio').map(function(){
+      var ready = new $.Deferred();
+      $(this).one('canplay', ready.resolve);
+      return ready.promise();
+      }));
+    }
 
 		function updatePlays(){
 			playAllButton.backgroundColor = "green";
-			endTime.innerHTML = formatTime(primaryTrack.duration);
-			timeElapsed.max = primaryTrack.duration;
+
+			  endTime.innerHTML = formatTime(primaryTrack.duration);
+        playHead.max = primaryTrack.duration;
+
+
 			var div  = document.getElementById("alltracks");
 			tracks = div.children;
 			for (i = 0; i < tracks.length; i++){
@@ -279,7 +310,7 @@
 					audioelement.pause();
 					playAllButton.innerHTML = "Play";
 				}
-			} 
+			}
 		}
 
 		function updateMutes(){
@@ -299,7 +330,7 @@
 					muteelement.innerHTML = "Mute";
 					muteelement.style.backgroundColor = "white";
 				}
-			} 
+			}
 
 			if (muteAllButton.value == "muteall"){
 				muteAllButton.value = "unmute";
@@ -326,7 +357,7 @@
 		}
 
 		function updateTrackPositions(){
-			var Elapsed = timeElapsed.value;
+			var Elapsed = playHead.value;
 			var div  = document.getElementById("alltracks");
 			tracks = div.children;
 			var trackchilds;
@@ -349,8 +380,9 @@
 		}
 
 
-		function formatTime(value) { 
+		function formatTime(value) {
 			var tick = value;
+			console.log(tick);
 			var mins = Math.floor(tick/60);
 			var secs = Math.floor(tick % 60);
 			var tock = (mins < 10 ? "0" : "" ) + mins + ":" + (secs < 10 ? "0" : "" ) + secs;
