@@ -214,6 +214,8 @@
 		centerPanButton.onclick = updatePans;
 		timeElapsed.oninput   = updateTrackPositions; 
 
+
+
 		////////////////////////////////////FUNCTIONS//////////////////////////////////	
 
 		function makeNewTrack(id, audiocontext){
@@ -224,15 +226,17 @@
 			var panSlider  = divchild[6];
 			var muteButton = divchild[8];
 
-			var panNode = audiocontext.createStereoPanner();
+			var pannerNode = audiocontext.createPanner();
 			var source = audiocontext.createMediaElementSource(audio);
 
-			source.connect(panNode);
-			panNode.connect(audiocontext.destination);
+			////new stuff////
+			audiocontext.listener.setPosition(0, 0, 0);
+			pannerNode.setPosition(0, 0, 1);
+			source.connect(pannerNode);
+			pannerNode.connect(audiocontext.destination);
 
 			function updatePan(){
-				panNode.pan.value = panSlider.value;
-
+				pannerNode.setPosition(panSlider.value, 0, 1 - panSlider.value);
 			}
 
 			function updateVol(){
